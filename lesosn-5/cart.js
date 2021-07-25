@@ -8,6 +8,7 @@
 
 let total = 0;
 let amount = 0;
+// let shopCart = [];
 
 function product() {
     let catalog = document.getElementById('catalog');
@@ -18,22 +19,25 @@ function product() {
         { name: 'Умная лампочка', price: 850 }
     ]
 
-    for (let i of product) {
-        let htmlProduct = `<section><header>${i.name}</header><p>${i.price} руб</p><p><button id="button">В корзину</button></p></section>`;
+    for (const i of product) {
+        let htmlProduct = `<section><header>${i.name}</header><p class="price">${i.price} руб</p><p><button id="button">В корзину</button></p></section>`;
         catalog.insertAdjacentHTML('afterbegin', htmlProduct);
     }
 }
 
-function addProduct(total) {
 
-    let button = document.getElementById('button');
-    button.addEventListener('click', add);
+function addProduct(total) {
+    let button = document.getElementsByTagName('button');
+
+    for (const iterator of button) {
+        iterator.addEventListener('click', add);
+    }
+
 
     function add() {
         total = 1 + total++;
         return cart(total);
-    };
-    return;
+    }
 }
 
 function cart(total) {
@@ -42,9 +46,12 @@ function cart(total) {
     if (total <= 0) {
         cart.insertAdjacentText('afterbegin', 'Корзина пуста');
     } else {
-        let htmlTotal = `<span>В корзине: ${total} товаров на сумму ${amount} рублей</span>`;
+        let htmlTotal = `<span id="total_amount">В корзине: ${total} товаров на сумму ${amount} рублей</span>`;
         cart.insertAdjacentHTML('afterbegin', htmlTotal);
     }
+
+    // let rem = document.getElementsByTagName('span');
+    // rem.removeEventListener('click', console.log(total));
 }
 
 product();
