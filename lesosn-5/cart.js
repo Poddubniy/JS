@@ -30,8 +30,10 @@ function addProduct(total) {
     button.addEventListener('click', add);
 
     function add() {
-        return 1 + total++;
+        total = 1 + total++;
+        return cart(total);
     };
+    return;
 }
 
 function cart(total) {
